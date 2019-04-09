@@ -3,5 +3,20 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "scripts": {
+    "dev": "nodemon --exec babel-node src",
+    "build": "babel src -d dist",
+    "start": "npm run build && nodemon dist/index.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.3",
+    "nodemon": "^1.18.11"
+  }
 }
