@@ -7,10 +7,16 @@
   "scripts": {
     "dev": "nodemon --exec babel-node src",
     "build": "babel src -d dist",
-    "start": "npm run build && nodemon dist/index.js"
+    "start": "npm run build && nodemon dist/index.js",
+    "reset-db": "knex-migrate down --to 0 && knex-migrate up",
+    "migrate": "knex-migrate"
   },
   "dependencies": {
-    "express": "^4.16.4"
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "knex": "^0.16.3",
+    "knex-migrate": "^1.7.2",
+    "pg": "^7.9.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
