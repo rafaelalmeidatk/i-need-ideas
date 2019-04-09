@@ -1,0 +1,7 @@
+{
+  "name": "i-need-ideas",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}
