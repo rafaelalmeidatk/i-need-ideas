@@ -7,7 +7,7 @@ exports.up = async function(knex) {
       .defaultTo(knex.raw('uuid_generate_v4()'));
     table.text('content');
     table.text('category');
-    table.timestamps();
+    table.timestamps(true, true);
   });
 };
 

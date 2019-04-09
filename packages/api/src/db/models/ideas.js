@@ -1,5 +1,11 @@
 import knex from '../knex';
 
+export const getAllIdeas = async () => {
+  return await knex('ideas')
+    .select('id', 'content', 'category')
+    .orderBy('updated_at', 'desc');
+};
+
 export const findIdeaById = async id => {
   const ideas = await knex('ideas').where({ id });
   return ideas && ideas[0];
