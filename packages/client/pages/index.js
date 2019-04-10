@@ -1,20 +1,31 @@
-import { useState } from 'react';
 import Layout from '../components/Layout';
 import Header from '../components/Header';
 import IdeasFilter from '../components/IdeasFilter';
 import IdeasGrid from '../components/IdeasGrid';
 
-const IndexPage = () => {
-  const [filterValue, setFilterValue] = useState('all');
+import { fetchAllIdeas } from '../api';
 
-  return (
-    <Layout>
-      <Header />
+class IndexPage extends React.Component {
+  static async getInitialProps() {
+    const { ideas } = await fetchAllIdeas();
+    return { ideas };
+  }
 
-      <IdeasFilter onFilterChange={value => setFilterValue(value)} filterValue={filterValue} />
-      <IdeasGrid filterValue={filterValue} />
-    </Layout>
-  );
-};
+  state = { filterValue: 'all' };
+
+  render() {
+    return (
+      <Layout>
+        <Header />
+
+        <IdeasFilter
+          onFilterChange={value => this.setState({ filterValue: value })}
+          filterValue={this.state.filterValue}
+        />
+        <IdeasGrid ideas={this.props.ideas} filterValue={this.state.filterValue} />
+      </Layout>
+    );
+  }
+}
 
 export default IndexPage;

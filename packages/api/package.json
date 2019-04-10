@@ -8,7 +8,7 @@
     "dev": "nodemon --exec babel-node src",
     "build": "babel src -d dist",
     "start": "npm run build && nodemon dist/index.js",
-    "reset-db": "knex-migrate down --to 0 && knex-migrate up",
+    "reset-db": "knex-migrate down --to 0 && knex-migrate up && knex seed:run",
     "migrate": "knex-migrate"
   },
   "dependencies": {

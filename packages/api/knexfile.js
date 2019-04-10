@@ -6,6 +6,10 @@ const migrations = {
   directory: path.normalize(path.join(__dirname, 'src/db/migrations'))
 };
 
+const seeds = {
+  directory: path.normalize(path.join(__dirname, `src/db/seeds`))
+};
+
 module.exports = {
   client: 'postgresql',
   connection: {
@@ -19,5 +23,6 @@ module.exports = {
     max: 10
   },
   debug: true,
-  migrations
+  migrations,
+  seeds
 };
