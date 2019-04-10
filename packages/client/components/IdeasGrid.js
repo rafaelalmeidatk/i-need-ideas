@@ -1,4 +1,4 @@
-import chunk from 'lodash/chunk';
+import { PoseGroup } from 'react-pose';
 import IdeaCard from './IdeaCard';
 
 const ideas = [
@@ -60,9 +60,11 @@ const IdeasGrid = ({ filterValue }) => {
 
   return (
     <div className="ideas-grid">
-      {filteredIdeas.map(idea => (
-        <IdeaCard key={idea.id} content={idea.content} category={idea.category} />
-      ))}
+      <PoseGroup>
+        {filteredIdeas.map(idea => (
+          <IdeaCard key={idea.id} content={idea.content} category={idea.category} />
+        ))}
+      </PoseGroup>
 
       <style jsx>{`
         .ideas-grid {

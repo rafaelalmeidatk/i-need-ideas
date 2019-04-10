@@ -1,17 +1,24 @@
+import posed from 'react-pose';
+
 function isAn(category) {
   return category === 'app';
 }
 
-const IdeaCard = ({ content, category }) => {
+const Item = posed.div({
+  enter: { opacity: 1 },
+  exit: { opacity: 0 }
+});
+
+const IdeaCard = ({ content, category, ...props }) => {
   const article = isAn(category) ? 'An' : 'A';
   return (
-    <div className="idea-card">
+    <Item className="idea-card" {...props}>
       <div className="heading">
         {article} {category.toLowerCase()}...
       </div>
       {content}
 
-      <style jsx>{`
+      <style jsx global>{`
         .idea-card {
           max-width: 27%;
           flex-direction: column;
@@ -21,7 +28,7 @@ const IdeaCard = ({ content, category }) => {
           box-shadow: 0 6px 30px 0 rgba(10, 50, 0, 0.2), 0 6px 100px 0 rgba(10, 50, 0, 0.15);
         }
       `}</style>
-    </div>
+    </Item>
   );
 };
 
