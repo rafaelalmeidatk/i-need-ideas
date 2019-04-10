@@ -33,37 +33,40 @@ const ideas = [
     category: 'app'
   },
   {
-    id: 'f7a3d274-7ff7-4444-8b05-e205a258ef9a',
+    id: 'f7a3d274-7ff7-4444-8b05-e205a238ef9a',
     content: 'to listen to music and create playlists',
     category: 'app'
   },
   {
-    id: 'f7a3d274-7ff7-4444-8b05-e205a258ef9a',
+    id: 'f7a3d274-7ff7-4244-8b05-e205a258ef9a',
     content: 'to keep track of your habits, you can see how frequent you are doing something new',
     category: 'app'
   },
   {
-    id: 'f7a3d274-7ff7-4444-8b05-e205a258ef9a',
+    id: 'f7a3d274-9ff7-4444-8b05-e205a258ef9a',
     content: 'that is a twitter dashboard to manage different accounts in one place',
     category: 'app'
   },
   {
-    id: 'f7a3d274-7ff7-4444-8b05-e205a258ef9a',
+    id: 'f7a3d274-7ff7-4444-8b05-b205a258ef9a',
     content: 'where you play as a cat',
     category: 'game'
   }
 ];
 
-const IdeasGrid = () => {
+const IdeasGrid = ({ filterValue }) => {
+  const filteredIdeas =
+    filterValue !== 'all' ? ideas.filter(idea => idea.category === filterValue) : ideas;
+
   return (
     <div className="ideas-grid">
-      {ideas.map(idea => (
+      {filteredIdeas.map(idea => (
         <IdeaCard key={idea.id} content={idea.content} category={idea.category} />
       ))}
 
       <style jsx>{`
         .ideas-grid {
-          margin-top: 2rem;
+          margin-top: 0.9rem;
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
