@@ -56,13 +56,9 @@ const ideas = [
 
 const IdeasGrid = () => {
   return (
-    <div className="ideas-grid tile is-ancestor is-vertical">
-      {chunk(ideas, 5).map((chunk, idx) => (
-        <div className="tile" key={idx}>
-          {chunk.map(idea => (
-            <IdeaCard key={idea.id} content={idea.content} category={idea.category} />
-          ))}
-        </div>
+    <div className="ideas-grid">
+      {ideas.map(idea => (
+        <IdeaCard key={idea.id} content={idea.content} category={idea.category} />
       ))}
 
       <style jsx>{`
@@ -70,6 +66,8 @@ const IdeasGrid = () => {
           margin-top: 2rem;
           display: flex;
           flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
         }
       `}</style>
     </div>
