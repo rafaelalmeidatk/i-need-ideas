@@ -1,4 +1,3 @@
-import 'react-toastify/dist/ReactToastify.min.css';
 import { ToastContainer, toast } from 'react-toastify';
 
 import Layout from '../components/Layout';
