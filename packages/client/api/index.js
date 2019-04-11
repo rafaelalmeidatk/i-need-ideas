@@ -10,7 +10,7 @@ export const fetchAllIdeas = async () => {
 };
 
 export const createIdea = async ({ content, category }) => {
-  const res = await fetch(API_URL + '/create', {
+  const res = await fetch(API_URL + 'create', {
     method: 'post',
     credentials: 'include',
     body: JSON.stringify({ content, category }),
@@ -23,7 +23,7 @@ export const createIdea = async ({ content, category }) => {
 };
 
 export const deleteIdea = async ({ id }) => {
-  const res = await fetch(API_URL + '/delete', {
+  const res = await fetch(API_URL + 'delete', {
     method: 'post',
     credentials: 'include',
     body: JSON.stringify({ id }),
