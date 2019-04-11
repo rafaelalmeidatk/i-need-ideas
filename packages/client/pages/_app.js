@@ -1,6 +1,6 @@
 import App, { Container } from 'next/app';
 import Head from 'next/head';
-import 'react-toastify/dist/ReactToastify.min.css';
+import '../static/ReactToastify.min.css';
 
 export default class MyApp extends App {
   render() {
