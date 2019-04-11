@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import posed, { PoseGroup } from 'react-pose';
 import InlineSelect from './InlineSelect';
 import Button from './Button';
+import ErrorNotification from './ErrorNotification';
+import Textarea from './Textarea';
+import { createIdea } from '../api';
 
 const Shade = posed.div({
   enter: { opacity: 1 },
@@ -28,16 +31,45 @@ const Modal = posed.div({
 const NewIdeaModal = ({ isVisible, onCreate, onCancel }) => {
   const [ideaCategory, setIdeaCategory] = useState('app');
   const [ideaText, setIdeaText] = useState('');
+  const [creating, setCreating] = useState(false);
+  const [error, setError] = useState({ code: null, message: null });
 
   const handleTextChange = e => {
     const { value } = e.target;
     // Remove newlines
     const newText = value.replace(/\n/g, '');
     setIdeaText(newText);
+
+    if (newText && error.code === 'EMPTY_TEXTAREA') {
+      setError({ code: null });
+    }
   };
 
   const handleCategoryChange = value => {
     setIdeaCategory(value);
+  };
+
+  const handleCreate = async () => {
+    if (!ideaText) {
+      return setError({
+        code: 'EMPTY_TEXTAREA'
+      });
+    }
+
+    setCreating(true);
+
+    try {
+      const res = await createIdea({ content: ideaText, category: ideaCategory });
+      console.log('ooo', res);
+      if (res.error) throw new Error(res.error.message);
+    } catch (err) {
+      return setError({
+        code: 'UNKNOWN',
+        message: 'Oops, something went wrong! Please, try again later'
+      });
+    }
+
+    setCreating(false);
   };
 
   return (
@@ -53,16 +85,22 @@ const NewIdeaModal = ({ isVisible, onCreate, onCancel }) => {
                 <InlineSelect value={ideaCategory} onChange={handleCategoryChange} />
                 ...
               </div>
-              <textarea
+
+              <Textarea
                 value={ideaText}
                 onChange={handleTextChange}
                 rows={2}
                 maxLength={200}
                 placeholder="that makes something great"
+                forceShowError={error.code === 'EMPTY_TEXTAREA'}
               />
 
+              <ErrorNotification isVisible={error.message} message={error.message} />
+
               <div className="button-wrapper">
-                <Button onClick={onCreate}>Create</Button>
+                <Button disabled={creating} loading={creating} onClick={handleCreate}>
+                  Create
+                </Button>
                 <Button negative onClick={onCancel}>
                   Cancel
                 </Button>
@@ -92,33 +130,8 @@ const NewIdeaModal = ({ isVisible, onCreate, onCancel }) => {
           align-items: center;
         }
 
-        textarea {
-          margin-top: 0.85rem;
-          border: 1px solid rgba(0, 0, 0, 0.2);
-          border-radius: 7px;
-          background: 0;
-          outline: 0;
-          color: rgba(0, 0, 0, 0.8);
-          font-size: 0.9375rem;
-          letter-spacing: -0.025rem;
-          line-height: 1.25rem;
-          max-height: 144px;
-          min-height: 20px;
-          padding: 10px;
-          resize: none;
-          width: 100%;
-        }
-
-        textarea:focus {
-          box-shadow: 0 0 0 3px rgba(130, 130, 130, 0.25);
-        }
-
-        textarea::placeholder {
-          color: rgba(0, 0, 0, 0.4);
-        }
-
         .button-wrapper {
-          margin-top: 1rem;
+          margin-top: 1.1rem;
           text-align: right;
         }
       `}</style>

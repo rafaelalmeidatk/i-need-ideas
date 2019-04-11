@@ -1,6 +1,9 @@
-const Button = ({ children, negative, ...props }) => (
-  <button type="button" className={negative ? 'negative' : ''} {...props}>
-    {children}
+import cx from 'classnames';
+import PulseLoader from 'react-spinners/PulseLoader';
+
+const Button = ({ children, negative, disabled, loading, ...props }) => (
+  <button type="button" className={cx({ negative, disabled, loading })} {...props}>
+    {loading ? <PulseLoader sizeUnit="px" size={4} color="rgba(255, 255, 255, 0.85)" /> : children}
 
     <style jsx>{`
       button {
@@ -21,12 +24,17 @@ const Button = ({ children, negative, ...props }) => (
         box-shadow: 0 2px 35px 2px rgba(0, 0, 0, 0.3), 0 1px 10px 0 rgba(0, 0, 0, 0.1);
         background: linear-gradient(45deg, rgba(0, 0, 0, 0.96), #333);
         top: 0px;
-        transition: top 0.1s ease, box-shadow 0.1s ease;
+        transition: width 1s ease, top 0.1s ease, box-shadow 0.1s ease;
       }
 
       button.negative {
         background: #fff;
         color: rgba(0, 0, 0, 0.85);
+      }
+
+      button.disabled {
+        background: #2d2d2d;
+        color: rgba(255, 255, 255, 0.85);
       }
 
       button:hover {

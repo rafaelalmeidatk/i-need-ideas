@@ -14,8 +14,12 @@ class IndexPage extends React.Component {
 
   state = { filterValue: 'all', modalVisible: true };
 
-  handleButtonClick = () => {
+  handleCreateIdeaButtonClick = () => {
     this.setState({ modalVisible: true });
+  };
+
+  handleNewIdeaModalClose = () => {
+    this.setState({ modalVisible: false });
   };
 
   render() {
@@ -31,12 +35,12 @@ class IndexPage extends React.Component {
           <div className="divider" />
           <div className="create-your-own">
             <span>Feeling creative?</span>{' '}
-            <Button onClick={this.handleButtonClick}>Create your own idea</Button>
+            <Button onClick={this.handleCreateIdeaButtonClick}>Create your own idea</Button>
           </div>
         </div>
         <IdeasGrid ideas={this.props.ideas} filterValue={this.state.filterValue} />
 
-        <NewIdeaModal isVisible={this.state.modalVisible} />
+        <NewIdeaModal isVisible={this.state.modalVisible} onCancel={this.handleNewIdeaModalClose} />
 
         <style jsx>{`
           .toolbar {

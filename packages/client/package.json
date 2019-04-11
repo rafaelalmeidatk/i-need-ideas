@@ -10,6 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "dotenv-webpack": "^1.7.0",
     "isomorphic-unfetch": "^3.0.0",
     "lodash": "^4.17.11",
@@ -17,6 +18,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-pose": "^4.0.8",
-    "react-select": "^2.4.2"
+    "react-select": "^2.4.2",
+    "react-spinners": "^0.5.4"
   }
 }
