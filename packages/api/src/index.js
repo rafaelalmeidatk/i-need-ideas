@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(
   cors({
     origin: ['https://i-need-ideas.herokuapp.com/'],
-    methods: ['GET', 'POST'],
+    // methods: ['GET', 'POST'],
     credentials: true
   })
 );
