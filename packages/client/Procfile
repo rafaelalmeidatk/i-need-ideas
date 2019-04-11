@@ -1,0 +1,1 @@
+web: yarn workspace @i-need-ideas/client start
