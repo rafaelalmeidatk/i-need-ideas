@@ -1,8 +1,9 @@
 import dynamic from 'next/dynamic';
+import PulseLoader from 'react-spinners/PulseLoader';
 
 // A simple workaround the style mismatch caused by SSR
 const ReactSelectNoSSR = dynamic(() => import('react-select'), {
-  loading: () => <div>Loading...</div>,
+  loading: () => <PulseLoader size={6} color="rgba(0, 0, 0, 0.8)" />,
   ssr: false
 });
 
@@ -32,7 +33,7 @@ const IdeasFilter = ({ filterValue, onFilterChange }) => {
 
   return (
     <div>
-      Filter by:
+      <span>Filter by:</span>
       <ReactSelectNoSSR
         styles={selectCustomStyles}
         value={options.filter(opt => opt.value === filterValue)}
@@ -44,6 +45,11 @@ const IdeasFilter = ({ filterValue, onFilterChange }) => {
         div {
           display: flex;
           align-items: center;
+        }
+      `}</style>
+      <style jsx global>{`
+        .css-0 {
+          margin-left: 0.5rem;
         }
       `}</style>
     </div>
