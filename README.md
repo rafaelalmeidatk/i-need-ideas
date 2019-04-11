@@ -1,4 +1,4 @@
-# I Need Ideas
+# I Need Ideas!
 
 An app where you can look for ideas for new projects and create your own ideas to inspire other people
 
