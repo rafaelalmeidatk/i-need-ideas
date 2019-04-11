@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL],
+    origin: ['https://i-need-ideas.herokuapp.com/'],
     methods: ['GET', 'POST'],
     credentials: true
   })
