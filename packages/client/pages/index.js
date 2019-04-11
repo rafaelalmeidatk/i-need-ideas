@@ -67,7 +67,11 @@ class IndexPage extends React.Component {
       <Layout>
         <ToastContainer position="top-right" />
         <Header />
-        <Toolbar />
+        <Toolbar
+          onFilterChange={value => this.setState({ filterValue: value })}
+          filterValue={this.state.filterValue}
+          onCreateIdeaClick={this.handleCreateIdeaButtonClick}
+        />
 
         <IdeasGrid
           ideas={ideas}
@@ -76,11 +80,7 @@ class IndexPage extends React.Component {
           filterValue={this.state.filterValue}
         />
 
-        <Footer
-          onFilterChange={value => this.setState({ filterValue: value })}
-          filterValue={this.state.filterValue}
-          onCreateIdeaClick={this.handleCreateIdeaButtonClick}
-        />
+        <Footer />
 
         <NewIdeaModal
           isVisible={this.state.modalVisible}
