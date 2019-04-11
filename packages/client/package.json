@@ -10,6 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
     "classnames": "^2.2.6",
     "dotenv-webpack": "^1.7.0",
     "isomorphic-unfetch": "^3.0.0",
@@ -19,6 +20,7 @@
     "react-dom": "^16.8.6",
     "react-pose": "^4.0.8",
     "react-select": "^2.4.2",
-    "react-spinners": "^0.5.4"
+    "react-spinners": "^0.5.4",
+    "react-toastify": "^5.0.0"
   }
 }

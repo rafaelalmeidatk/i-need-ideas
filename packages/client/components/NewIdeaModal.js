@@ -77,9 +77,9 @@ const NewIdeaModal = ({ isVisible, onCreated, onCancel }) => {
         code: 'UNKNOWN',
         message: 'Oops, something went wrong! Please, try again later'
       });
+    } finally {
+      setCreating(false);
     }
-
-    setCreating(false);
   };
 
   return (

@@ -1,18 +1,26 @@
+import 'react-toastify/dist/ReactToastify.min.css';
+import { ToastContainer, toast } from 'react-toastify';
+
 import Layout from '../components/Layout';
 import Header from '../components/Header';
 import IdeasFilter from '../components/IdeasFilter';
 import IdeasGrid from '../components/IdeasGrid';
 import Button from '../components/Button';
 import NewIdeaModal from '../components/NewIdeaModal';
-import { fetchAllIdeas } from '../api';
+import { fetchAllIdeas, deleteIdea } from '../api';
 
 class IndexPage extends React.Component {
   state = { filterValue: 'all', modalVisible: false, fetching: true, ideas: [] };
 
   componentDidMount() {
-    fetchAllIdeas().then(({ ideas }) => {
-      this.setState({ ideas, fetching: false });
-    });
+    fetchAllIdeas()
+      .then(({ ideas }) => {
+        this.setState({ ideas, fetching: false });
+      })
+      .catch(err => {
+        console.error(err);
+        this.setState({ ideas: [], fetching: false });
+      });
   }
 
   handleCreateIdeaButtonClick = () => {
@@ -30,13 +38,35 @@ class IndexPage extends React.Component {
     }));
   };
 
+  handleDeleteIdea = async id => {
+    try {
+      const res = await deleteIdea({ id });
+
+      if (res.error && res.error.code === 'FORBIDDEN') {
+        return toast.error("Hey! This idea is not yours, you can't delete it");
+      } else if (res.error) {
+        return toast.error('Oops, something went wrong! Please, try again later');
+      }
+    } catch (err) {
+      console.error(err);
+      return toast.error('Oops, something went wrong! Please, try again later');
+    }
+
+    // At this point the idea has been deleted without issues, remove it from
+    // local state
+    this.setState(state => ({
+      ...state,
+      ideas: state.ideas.filter(idea => idea.id !== id)
+    }));
+  };
+
   render() {
     const { fetching, ideas } = this.state;
 
     return (
       <Layout>
+        <ToastContainer position="top-right" />
         <Header />
-
         <div className="toolbar">
           <IdeasFilter
             onFilterChange={value => this.setState({ filterValue: value })}
@@ -48,7 +78,13 @@ class IndexPage extends React.Component {
             <Button onClick={this.handleCreateIdeaButtonClick}>Create your own idea</Button>
           </div>
         </div>
-        <IdeasGrid ideas={ideas} loading={fetching} filterValue={this.state.filterValue} />
+
+        <IdeasGrid
+          ideas={ideas}
+          loading={fetching}
+          onIdeaDelete={this.handleDeleteIdea}
+          filterValue={this.state.filterValue}
+        />
 
         <NewIdeaModal
           isVisible={this.state.modalVisible}

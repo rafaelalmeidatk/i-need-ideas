@@ -2,11 +2,11 @@ import { PoseGroup } from 'react-pose';
 import GridLoader from 'react-spinners/GridLoader';
 import IdeaCard from './IdeaCard';
 
-const IdeasGrid = ({ ideas, loading, filterValue }) => {
-  if (ideas.length === 0) {
+const IdeasGrid = ({ ideas, loading, onIdeaDelete, filterValue }) => {
+  if (loading) {
     return (
       <div>
-        There are no ideas at the moment. Be the first one!
+        <GridLoader color="rgba(0, 0, 0, 0.8)" />
         <style jsx>{`
           div {
             margin-top: 2.2rem;
@@ -19,10 +19,10 @@ const IdeasGrid = ({ ideas, loading, filterValue }) => {
     );
   }
 
-  if (loading) {
+  if (ideas.length === 0) {
     return (
       <div>
-        <GridLoader color="rgba(0, 0, 0, 0.8)" />
+        There are no ideas at the moment. Be the first one!
         <style jsx>{`
           div {
             margin-top: 2.2rem;
@@ -42,7 +42,13 @@ const IdeasGrid = ({ ideas, loading, filterValue }) => {
     <div className="ideas-grid">
       <PoseGroup animateOnMount={true}>
         {filteredIdeas.map(idea => (
-          <IdeaCard key={idea.id} content={idea.content} category={idea.category} />
+          <IdeaCard
+            key={idea.id}
+            id={idea.id}
+            content={idea.content}
+            category={idea.category}
+            onDelete={onIdeaDelete}
+          />
         ))}
       </PoseGroup>
 
