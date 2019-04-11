@@ -7,12 +7,13 @@ import NewIdeaModal from '../components/NewIdeaModal';
 import { fetchAllIdeas } from '../api';
 
 class IndexPage extends React.Component {
-  static async getInitialProps() {
-    const { ideas } = await fetchAllIdeas();
-    return { ideas };
-  }
+  state = { filterValue: 'all', modalVisible: false, fetching: true, ideas: [] };
 
-  state = { filterValue: 'all', modalVisible: true };
+  componentDidMount() {
+    fetchAllIdeas().then(({ ideas }) => {
+      this.setState({ ideas, fetching: false });
+    });
+  }
 
   handleCreateIdeaButtonClick = () => {
     this.setState({ modalVisible: true });
@@ -22,7 +23,16 @@ class IndexPage extends React.Component {
     this.setState({ modalVisible: false });
   };
 
+  handleNewIdeaCreated = idea => {
+    this.setState(state => ({
+      ...state,
+      ideas: [idea, ...state.ideas]
+    }));
+  };
+
   render() {
+    const { fetching, ideas } = this.state;
+
     return (
       <Layout>
         <Header />
@@ -38,9 +48,13 @@ class IndexPage extends React.Component {
             <Button onClick={this.handleCreateIdeaButtonClick}>Create your own idea</Button>
           </div>
         </div>
-        <IdeasGrid ideas={this.props.ideas} filterValue={this.state.filterValue} />
+        <IdeasGrid ideas={ideas} loading={fetching} filterValue={this.state.filterValue} />
 
-        <NewIdeaModal isVisible={this.state.modalVisible} onCancel={this.handleNewIdeaModalClose} />
+        <NewIdeaModal
+          isVisible={this.state.modalVisible}
+          onCreated={this.handleNewIdeaCreated}
+          onCancel={this.handleNewIdeaModalClose}
+        />
 
         <style jsx>{`
           .toolbar {

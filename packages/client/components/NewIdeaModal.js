@@ -28,7 +28,7 @@ const Modal = posed.div({
   }
 });
 
-const NewIdeaModal = ({ isVisible, onCreate, onCancel }) => {
+const NewIdeaModal = ({ isVisible, onCreated, onCancel }) => {
   const [ideaCategory, setIdeaCategory] = useState('app');
   const [ideaText, setIdeaText] = useState('');
   const [creating, setCreating] = useState(false);
@@ -60,8 +60,18 @@ const NewIdeaModal = ({ isVisible, onCreate, onCancel }) => {
 
     try {
       const res = await createIdea({ content: ideaText, category: ideaCategory });
-      console.log('ooo', res);
-      if (res.error) throw new Error(res.error.message);
+      if (res.idea) {
+        // Give some time to the modal get out of the screen
+        // so the user can see the animation
+        setTimeout(() => {
+          onCreated(res.idea);
+          setIdeaText('');
+        }, 200);
+        onCancel();
+      }
+      if (res.error) {
+        throw new Error(res.error.message);
+      }
     } catch (err) {
       return setError({
         code: 'UNKNOWN',
