@@ -11,7 +11,7 @@ const Header = () => (
         text-align: center;
       }
       h1 {
-        margin-top: 2rem;
+        padding-top: 2rem;
         font-family: 'Roboto Slab', serif;
         font-weight: bold;
         font-size: 4.3em;

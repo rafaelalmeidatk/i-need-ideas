@@ -1,5 +1,5 @@
-const Button = ({ children }) => (
-  <button>
+const Button = ({ children, negative, ...props }) => (
+  <button type="button" className={negative ? 'negative' : ''} {...props}>
     {children}
 
     <style jsx>{`
@@ -10,7 +10,9 @@ const Button = ({ children }) => (
         background-color: #000;
         color: #fff;
         font-family: 'Roboto Slab', serif;
+        font-weight: 400;
         outline: none;
+        background-clip: padding-box !important;
 
         cursor: pointer;
         border: none;
@@ -20,6 +22,11 @@ const Button = ({ children }) => (
         background: linear-gradient(45deg, rgba(0, 0, 0, 0.96), #333);
         top: 0px;
         transition: top 0.1s ease, box-shadow 0.1s ease;
+      }
+
+      button.negative {
+        background: #fff;
+        color: rgba(0, 0, 0, 0.85);
       }
 
       button:hover {
