@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "npm run build && next start"
+    "start": "npm run build && next start -p $PORT"
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
