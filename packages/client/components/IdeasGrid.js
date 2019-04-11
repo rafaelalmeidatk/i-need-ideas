@@ -55,6 +55,7 @@ const IdeasGrid = ({ ideas, loading, onIdeaDelete, filterValue }) => {
       <style jsx>{`
         .ideas-grid {
           margin-top: 0.9rem;
+          padding-bottom: 1.5rem;
           display: flex;
           flex-wrap: wrap;
           justify-content: center;

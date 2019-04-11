@@ -11,7 +11,7 @@ const Footer = () => (
     <style jsx>{`
       .footer {
         flex: 1 1 auto;
-        padding: 4rem 1.5rem 3.2rem;
+        padding: 2.5rem 1.5rem 3.2rem;
         display: flex;
         justify-content: center;
         align-items: flex-end;
