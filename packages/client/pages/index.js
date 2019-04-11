@@ -6,6 +6,7 @@ import IdeasFilter from '../components/IdeasFilter';
 import IdeasGrid from '../components/IdeasGrid';
 import Button from '../components/Button';
 import NewIdeaModal from '../components/NewIdeaModal';
+import Footer from '../components/Footer';
 import { fetchAllIdeas, deleteIdea } from '../api';
 
 class IndexPage extends React.Component {
@@ -84,6 +85,8 @@ class IndexPage extends React.Component {
           onIdeaDelete={this.handleDeleteIdea}
           filterValue={this.state.filterValue}
         />
+
+        <Footer />
 
         <NewIdeaModal
           isVisible={this.state.modalVisible}
