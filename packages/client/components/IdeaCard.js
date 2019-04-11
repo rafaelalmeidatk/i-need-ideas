@@ -42,6 +42,17 @@ const IdeaCard = ({ id, content, category, onDelete, ...props }) => {
         .idea-card:hover .heading .delete {
           opacity: 1;
         }
+
+        @media (max-width: 640px) {
+          .idea-card {
+            min-width: 40%;
+          }
+        }
+        @media (max-width: 520px) {
+          .idea-card {
+            min-width: 90%;
+          }
+        }
       `}</style>
     </Item>
   );

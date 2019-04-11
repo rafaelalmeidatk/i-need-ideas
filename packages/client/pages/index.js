@@ -1,10 +1,10 @@
 import { ToastContainer, toast } from 'react-toastify';
 
 import Layout from '../components/Layout';
+
 import Header from '../components/Header';
-import IdeasFilter from '../components/IdeasFilter';
+import Toolbar from '../components/Toolbar';
 import IdeasGrid from '../components/IdeasGrid';
-import Button from '../components/Button';
 import NewIdeaModal from '../components/NewIdeaModal';
 import Footer from '../components/Footer';
 import { fetchAllIdeas, deleteIdea } from '../api';
@@ -67,17 +67,7 @@ class IndexPage extends React.Component {
       <Layout>
         <ToastContainer position="top-right" />
         <Header />
-        <div className="toolbar">
-          <IdeasFilter
-            onFilterChange={value => this.setState({ filterValue: value })}
-            filterValue={this.state.filterValue}
-          />
-          <div className="divider" />
-          <div className="create-your-own">
-            <span>Feeling creative?</span>{' '}
-            <Button onClick={this.handleCreateIdeaButtonClick}>Create your own idea</Button>
-          </div>
-        </div>
+        <Toolbar />
 
         <IdeasGrid
           ideas={ideas}
@@ -86,35 +76,17 @@ class IndexPage extends React.Component {
           filterValue={this.state.filterValue}
         />
 
-        <Footer />
+        <Footer
+          onFilterChange={value => this.setState({ filterValue: value })}
+          filterValue={this.state.filterValue}
+          onCreateIdeaClick={this.handleCreateIdeaButtonClick}
+        />
 
         <NewIdeaModal
           isVisible={this.state.modalVisible}
           onCreated={this.handleNewIdeaCreated}
           onCancel={this.handleNewIdeaModalClose}
         />
-
-        <style jsx>{`
-          .toolbar {
-            height: 38px;
-            margin-top: 2rem;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .divider {
-            margin: 0 16px;
-            height: 1px;
-            width: 28px;
-            background: rgba(0, 0, 0, 0.2);
-          }
-
-          .create-your-own span {
-            margin-right: 8px;
-          }
-        `}</style>
       </Layout>
     );
   }

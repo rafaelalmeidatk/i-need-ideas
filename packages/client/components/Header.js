@@ -9,6 +9,7 @@ const Header = () => (
     <style jsx>{`
       header {
         text-align: center;
+        padding: 0 0.5rem;
       }
       h1 {
         padding-top: 2rem;
