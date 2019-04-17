@@ -39,6 +39,8 @@ const Button = ({ children, negative, disabled, loading, ...props }) => (
       button.negative {
         background: #fff;
         color: rgba(0, 0, 0, 0.85);
+        box-shadow: 0 2px 35px 2px rgba(0, 0, 0, 0.2),
+          0 1px 10px 0 rgba(0, 0, 0, 0.1);
       }
 
       button.disabled {
@@ -48,7 +50,7 @@ const Button = ({ children, negative, disabled, loading, ...props }) => (
 
       button:hover {
         top: -2px;
-        box-shadow: 0 4px 40px 2px rgba(0, 0, 0, 0.4),
+        box-shadow: 0 4px 40px 2px rgba(0, 0, 0, 0.3),
           0 3px 25px 0 rgba(0, 0, 0, 0.1);
       }
 
