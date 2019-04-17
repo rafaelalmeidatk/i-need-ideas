@@ -18,11 +18,26 @@ const selectCustomStyles = {
   indicatorSeparator: () => ({
     display: 'none',
   }),
+  option: provided => ({
+    ...provided,
+    '&:hover': {
+      color: '#fff',
+    },
+  }),
 };
 
 const InlineSelect = ({ value, onChange }) => (
   <Select
     value={options.filter(op => op.value === value)}
+    theme={theme => ({
+      ...theme,
+      colors: {
+        ...theme.colors,
+        primary50: '#424242',
+        primary25: '#1f1f1f',
+        primary: '#1f1f1f',
+      },
+    })}
     onChange={({ value }) => onChange(value)}
     isSearchable={false}
     styles={selectCustomStyles}

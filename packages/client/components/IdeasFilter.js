@@ -25,6 +25,12 @@ const selectCustomStyles = {
     marginLeft: '0.7rem',
     cursor: 'pointer',
   }),
+  option: provided => ({
+    ...provided,
+    '&:hover': {
+      color: '#fff',
+    },
+  }),
 };
 
 const IdeasFilter = ({ filterValue, onFilterChange }) => {
@@ -37,6 +43,15 @@ const IdeasFilter = ({ filterValue, onFilterChange }) => {
       <span>Filter by:</span>
       <ReactSelectNoSSR
         styles={selectCustomStyles}
+        theme={theme => ({
+          ...theme,
+          colors: {
+            ...theme.colors,
+            primary50: '#424242',
+            primary25: '#1f1f1f',
+            primary: '#1f1f1f',
+          },
+        })}
         value={options.filter(opt => opt.value === filterValue)}
         onChange={onValueChange}
         options={options}
