@@ -40,15 +40,19 @@ class IndexPage extends React.Component {
 
   handleDeleteIdea = async id => {
     try {
+      this.setIdeaDeleting(id, true);
       const res = await deleteIdea({ id });
 
       if (res.error && res.error.code === 'FORBIDDEN') {
+        this.setIdeaDeleting(id, false);
         return toast.error("Hey! This idea is not yours, you can't delete it");
       } else if (res.error) {
+        this.setIdeaDeleting(id, false);
         return toast.error('Oops, something went wrong! Please, try again later');
       }
     } catch (err) {
       console.error(err);
+      this.setIdeaDeleting(id, false);
       return toast.error('Oops, something went wrong! Please, try again later');
     }
 
@@ -57,6 +61,13 @@ class IndexPage extends React.Component {
     this.setState(state => ({
       ...state,
       ideas: state.ideas.filter(idea => idea.id !== id)
+    }));
+  };
+
+  setIdeaDeleting = (id, isDeleting) => {
+    this.setState(state => ({
+      ...state,
+      ideas: state.ideas.map(idea => (idea.id === id ? { ...idea, isDeleting } : idea))
     }));
   };
 
@@ -78,6 +89,7 @@ class IndexPage extends React.Component {
           loading={fetching}
           onIdeaDelete={this.handleDeleteIdea}
           filterValue={this.state.filterValue}
+          ideasLoadingDelete={{}}
         />
 
         <Footer />

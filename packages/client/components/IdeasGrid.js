@@ -47,6 +47,7 @@ const IdeasGrid = ({ ideas, loading, onIdeaDelete, filterValue }) => {
             id={idea.id}
             content={idea.content}
             category={idea.category}
+            isDeleting={idea.isDeleting}
             onDelete={onIdeaDelete}
           />
         ))}

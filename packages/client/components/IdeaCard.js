@@ -1,4 +1,5 @@
 import posed from 'react-pose';
+import PulseLoader from 'react-spinners/PulseLoader';
 
 function isAn(category) {
   return category === 'app';
@@ -9,13 +10,14 @@ const Item = posed.div({
   exit: { opacity: 0 }
 });
 
-const IdeaCard = ({ id, content, category, onDelete, ...props }) => {
+const IdeaCard = ({ id, content, category, isDeleting, onDelete, ...props }) => {
   const article = isAn(category) ? 'An' : 'A';
   return (
     <Item className="idea-card" {...props}>
       <div className="heading">
         {article} {category.toLowerCase()}...
-        <button className="delete is-small" onClick={() => onDelete(id)} />
+        {isDeleting && <PulseLoader sizeUnit="px" size={4} color="rgba(0, 0, 0, 0.85)" />}
+        {!isDeleting && <button className="delete is-small" onClick={() => onDelete(id)} />}
       </div>
       {content}
 
