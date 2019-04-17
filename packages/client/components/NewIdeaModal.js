@@ -111,6 +111,10 @@ const NewIdeaModal = ({ isVisible, onCreated, onCancel }) => {
                 forceShowError={error.code === 'EMPTY_TEXTAREA'}
               />
 
+              <div className="notice">
+                You are able to delete your idea during your current session.
+              </div>
+
               <ErrorNotification
                 isVisible={error.message}
                 message={error.message}
@@ -152,6 +156,12 @@ const NewIdeaModal = ({ isVisible, onCreated, onCancel }) => {
           font-size: 1.1em;
           display: flex;
           align-items: center;
+        }
+
+        .notice {
+          padding: 4px 8px 2px;
+          color: rgba(0, 0, 0, 0.6);
+          font-size: 0.9em;
         }
 
         .button-wrapper {
