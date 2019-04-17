@@ -3,6 +3,8 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 import routes from './routes';
 
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+
 //--------------------
 // Server startup
 
@@ -34,7 +36,8 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: false,
+      httpOnly: true,
+      secure: IS_PRODUCTION,
     },
   })
 );
