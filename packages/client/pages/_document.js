@@ -10,7 +10,10 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet" />
+          <link
+            href="https://fonts.googleapis.com/css?family=Roboto+Slab"
+            rel="stylesheet"
+          />
           <link
             href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
             rel="stylesheet"

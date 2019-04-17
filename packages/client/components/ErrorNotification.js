@@ -2,12 +2,14 @@ import posed, { PoseGroup } from 'react-pose';
 
 const Notification = posed.div({
   enter: { opacity: 1, height: 'auto' },
-  exit: { opacity: 0, height: 0 }
+  exit: { opacity: 0, height: 0 },
 });
 
 const ErrorNotification = ({ isVisible, message }) => (
   <div>
-    <PoseGroup>{isVisible && <Notification key="notification">{message}</Notification>}</PoseGroup>
+    <PoseGroup>
+      {isVisible && <Notification key="notification">{message}</Notification>}
+    </PoseGroup>
     <style jsx>{`
       div {
         color: #ff3860;

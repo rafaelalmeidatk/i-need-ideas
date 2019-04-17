@@ -7,17 +7,28 @@ function isAn(category) {
 
 const Item = posed.div({
   enter: { opacity: 1 },
-  exit: { opacity: 0 }
+  exit: { opacity: 0 },
 });
 
-const IdeaCard = ({ id, content, category, isDeleting, onDelete, ...props }) => {
+const IdeaCard = ({
+  id,
+  content,
+  category,
+  isDeleting,
+  onDelete,
+  ...props
+}) => {
   const article = isAn(category) ? 'An' : 'A';
   return (
     <Item className="idea-card" {...props}>
       <div className="heading">
         {article} {category.toLowerCase()}...
-        {isDeleting && <PulseLoader sizeUnit="px" size={4} color="rgba(0, 0, 0, 0.85)" />}
-        {!isDeleting && <button className="delete is-small" onClick={() => onDelete(id)} />}
+        {isDeleting && (
+          <PulseLoader sizeUnit="px" size={4} color="rgba(0, 0, 0, 0.85)" />
+        )}
+        {!isDeleting && (
+          <button className="delete is-small" onClick={() => onDelete(id)} />
+        )}
       </div>
       {content}
 
@@ -39,7 +50,8 @@ const IdeaCard = ({ id, content, category, isDeleting, onDelete, ...props }) => 
           padding: 20px;
           margin: 20px;
           border-radius: 5px;
-          box-shadow: 0 6px 30px 0 rgba(10, 50, 0, 0.2), 0 6px 100px 0 rgba(10, 50, 0, 0.15);
+          box-shadow: 0 6px 30px 0 rgba(10, 50, 0, 0.2),
+            0 6px 100px 0 rgba(10, 50, 0, 0.15);
         }
         .idea-card:hover .heading .delete {
           opacity: 1;

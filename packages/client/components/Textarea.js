@@ -5,7 +5,7 @@ import posed, { PoseGroup } from 'react-pose';
 const ErrorText = posed.div({
   visible: { opacity: 1, bottom: '-8px' },
   hidden: { opacity: 0, bottom: '-2px', transition: { duration: 120 } },
-  initialPose: 'hidden'
+  initialPose: 'hidden',
 });
 
 const Textarea = ({ forceShowError, onChange, ...props }) => {
@@ -22,7 +22,11 @@ const Textarea = ({ forceShowError, onChange, ...props }) => {
 
   return (
     <div>
-      <textarea className={cx({ error: shouldShowError })} onChange={handleTextChange} {...props} />
+      <textarea
+        className={cx({ error: shouldShowError })}
+        onChange={handleTextChange}
+        {...props}
+      />
       <ErrorText
         key="error-text"
         className="error-text"

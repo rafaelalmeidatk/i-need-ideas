@@ -3,7 +3,8 @@ const Footer = () => (
     <div className="content has-text-centered">
       <p>
         <strong>I Need Ideas!</strong> by{' '}
-        <a href="https://github.com/rafaelalmeidatk">Rafael Almeida</a>. Check the source code{' '}
+        <a href="https://github.com/rafaelalmeidatk">Rafael Almeida</a>. Check
+        the source code{' '}
         <a href="https://github.com/rafaelalmeidatk/i-need-ideas">here</a>.
       </p>
     </div>

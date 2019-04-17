@@ -8,7 +8,7 @@ import { createIdea } from '../api';
 
 const Shade = posed.div({
   enter: { opacity: 1 },
-  exit: { opacity: 0 }
+  exit: { opacity: 0 },
 });
 
 const Modal = posed.div({
@@ -18,14 +18,14 @@ const Modal = posed.div({
     delay: 300,
     transition: {
       y: { type: 'spring', stiffness: 500, damping: 20 },
-      default: { duration: 200 }
-    }
+      default: { duration: 200 },
+    },
   },
   exit: {
     y: 50,
     opacity: 0,
-    transition: { duration: 150 }
-  }
+    transition: { duration: 150 },
+  },
 });
 
 const NewIdeaModal = ({ isVisible, onCreated, onCancel }) => {
@@ -52,14 +52,17 @@ const NewIdeaModal = ({ isVisible, onCreated, onCancel }) => {
   const handleCreate = async () => {
     if (!ideaText) {
       return setError({
-        code: 'EMPTY_TEXTAREA'
+        code: 'EMPTY_TEXTAREA',
       });
     }
 
     setCreating(true);
 
     try {
-      const res = await createIdea({ content: ideaText, category: ideaCategory });
+      const res = await createIdea({
+        content: ideaText,
+        category: ideaCategory,
+      });
       if (res.idea) {
         // Give some time to the modal get out of the screen
         // so the user can see the animation
@@ -75,7 +78,7 @@ const NewIdeaModal = ({ isVisible, onCreated, onCancel }) => {
     } catch (err) {
       return setError({
         code: 'UNKNOWN',
-        message: 'Oops, something went wrong! Please, try again later'
+        message: 'Oops, something went wrong! Please, try again later',
       });
     } finally {
       setCreating(false);
@@ -92,7 +95,10 @@ const NewIdeaModal = ({ isVisible, onCreated, onCancel }) => {
               <h2>Let's create a new idea!</h2>
               <div className="category-selection">
                 My idea is
-                <InlineSelect value={ideaCategory} onChange={handleCategoryChange} />
+                <InlineSelect
+                  value={ideaCategory}
+                  onChange={handleCategoryChange}
+                />
                 ...
               </div>
 
@@ -105,10 +111,17 @@ const NewIdeaModal = ({ isVisible, onCreated, onCancel }) => {
                 forceShowError={error.code === 'EMPTY_TEXTAREA'}
               />
 
-              <ErrorNotification isVisible={error.message} message={error.message} />
+              <ErrorNotification
+                isVisible={error.message}
+                message={error.message}
+              />
 
               <div className="button-wrapper">
-                <Button disabled={creating} loading={creating} onClick={handleCreate}>
+                <Button
+                  disabled={creating}
+                  loading={creating}
+                  onClick={handleCreate}
+                >
                   Create
                 </Button>
                 <Button negative onClick={onCancel}>
@@ -116,7 +129,7 @@ const NewIdeaModal = ({ isVisible, onCreated, onCancel }) => {
                 </Button>
               </div>
             </div>
-          </Modal>
+          </Modal>,
         ]}
       </PoseGroup>
 
@@ -126,7 +139,8 @@ const NewIdeaModal = ({ isVisible, onCreated, onCancel }) => {
           padding: 30px 45px;
           border-radius: 10px;
           background: #fff;
-          box-shadow: 0 2px 35px 2px rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 35px 2px rgba(0, 0, 0, 0.2),
+            0 1px 10px 0 rgba(0, 0, 0, 0.1);
         }
 
         h2 {

@@ -4,7 +4,7 @@ const { API_URL } = process.env;
 
 export const fetchAllIdeas = async () => {
   const res = await fetch(API_URL, {
-    credentials: 'include'
+    credentials: 'include',
   });
   return await res.json();
 };
@@ -16,8 +16,8 @@ export const createIdea = async ({ content, category }) => {
     body: JSON.stringify({ content, category }),
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+    },
   });
   return await res.json();
 };
@@ -29,8 +29,8 @@ export const deleteIdea = async ({ id }) => {
     body: JSON.stringify({ id }),
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+    },
   });
   return await res.json();
 };

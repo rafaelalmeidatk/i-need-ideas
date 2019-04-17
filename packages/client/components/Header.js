@@ -2,7 +2,8 @@ const Header = () => (
   <header>
     <h1>I Need Ideas!</h1>
     <h2>
-      Do you want to build something but are out of ideas? Need some inspiration?
+      Do you want to build something but are out of ideas? Need some
+      inspiration?
       <br />
       Here are some ideas to help you!
     </h2>

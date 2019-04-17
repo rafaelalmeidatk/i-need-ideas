@@ -1,6 +1,11 @@
 import express from 'express';
 import uuid from 'uuid/v4';
-import { getAllIdeas, findIdeaById, createIdea, deleteIdea } from '../db/models/ideas';
+import {
+  getAllIdeas,
+  findIdeaById,
+  createIdea,
+  deleteIdea,
+} from '../db/models/ideas';
 
 const router = express.Router();
 
@@ -26,8 +31,8 @@ router.post('/create', async (req, res) => {
     return res.status(400).json({
       error: {
         code: 'BAD_INPUT',
-        message: 'Content and Category are required'
-      }
+        message: 'Content and Category are required',
+      },
     });
   }
 
@@ -38,8 +43,8 @@ router.post('/create', async (req, res) => {
     return res.status(500).json({
       error: {
         code: 'INTERNAL SERVER ERROR',
-        message: 'Some unknown error happened'
-      }
+        message: 'Some unknown error happened',
+      },
     });
   }
 
@@ -56,8 +61,8 @@ router.post('/delete', async (req, res) => {
     return res.status(401).json({
       error: {
         code: 'UNAUTHORIZED',
-        message: 'No user found'
-      }
+        message: 'No user found',
+      },
     });
   }
 
@@ -72,16 +77,16 @@ router.post('/delete', async (req, res) => {
       return res.status(403).json({
         error: {
           code: 'FORBIDDEN',
-          message: 'You are not allowed to do that'
-        }
+          message: 'You are not allowed to do that',
+        },
       });
     }
 
     return res.status(500).json({
       error: {
         code: 'INTERNAL SERVER ERROR',
-        message: 'Some unknown error happened'
-      }
+        message: 'Some unknown error happened',
+      },
     });
   }
 });

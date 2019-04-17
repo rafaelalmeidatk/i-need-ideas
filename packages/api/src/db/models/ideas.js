@@ -19,7 +19,7 @@ export const createIdea = async ({ content, category, createdBy }) => {
       .insert({
         content,
         category,
-        created_by: createdBy
+        created_by: createdBy,
       })
       .returning('id');
     id = result[0];

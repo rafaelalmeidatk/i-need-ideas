@@ -36,7 +36,9 @@ const IdeasGrid = ({ ideas, loading, onIdeaDelete, filterValue }) => {
   }
 
   const filteredIdeas =
-    filterValue !== 'all' ? ideas.filter(idea => idea.category === filterValue) : ideas;
+    filterValue !== 'all'
+      ? ideas.filter(idea => idea.category === filterValue)
+      : ideas;
 
   return (
     <div className="ideas-grid">

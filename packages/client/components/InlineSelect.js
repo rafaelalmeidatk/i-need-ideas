@@ -3,7 +3,7 @@ import Select from 'react-select';
 const options = [
   { value: 'app', label: 'an app' },
   { value: 'game', label: 'a game' },
-  { value: 'book', label: 'a book' }
+  { value: 'book', label: 'a book' },
 ];
 
 const selectCustomStyles = {
@@ -13,11 +13,11 @@ const selectCustomStyles = {
     padding: '3px 5px 0',
     border: 'none',
     borderBottom: '2px solid rgba(0, 0, 0, 0.8)',
-    cursor: 'pointer'
+    cursor: 'pointer',
   }),
   indicatorSeparator: () => ({
-    display: 'none'
-  })
+    display: 'none',
+  }),
 };
 
 const InlineSelect = ({ value, onChange }) => (

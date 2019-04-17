@@ -1,7 +1,6 @@
 import { ToastContainer, toast } from 'react-toastify';
 
 import Layout from '../components/Layout';
-
 import Header from '../components/Header';
 import Toolbar from '../components/Toolbar';
 import IdeasGrid from '../components/IdeasGrid';
@@ -10,7 +9,12 @@ import Footer from '../components/Footer';
 import { fetchAllIdeas, deleteIdea } from '../api';
 
 class IndexPage extends React.Component {
-  state = { filterValue: 'all', modalVisible: false, fetching: true, ideas: [] };
+  state = {
+    filterValue: 'all',
+    modalVisible: false,
+    fetching: true,
+    ideas: [],
+  };
 
   componentDidMount() {
     fetchAllIdeas()
@@ -34,7 +38,7 @@ class IndexPage extends React.Component {
   handleNewIdeaCreated = idea => {
     this.setState(state => ({
       ...state,
-      ideas: [idea, ...state.ideas]
+      ideas: [idea, ...state.ideas],
     }));
   };
 
@@ -48,7 +52,9 @@ class IndexPage extends React.Component {
         return toast.error("Hey! This idea is not yours, you can't delete it");
       } else if (res.error) {
         this.setIdeaDeleting(id, false);
-        return toast.error('Oops, something went wrong! Please, try again later');
+        return toast.error(
+          'Oops, something went wrong! Please, try again later'
+        );
       }
     } catch (err) {
       console.error(err);
@@ -60,14 +66,16 @@ class IndexPage extends React.Component {
     // local state
     this.setState(state => ({
       ...state,
-      ideas: state.ideas.filter(idea => idea.id !== id)
+      ideas: state.ideas.filter(idea => idea.id !== id),
     }));
   };
 
   setIdeaDeleting = (id, isDeleting) => {
     this.setState(state => ({
       ...state,
-      ideas: state.ideas.map(idea => (idea.id === id ? { ...idea, isDeleting } : idea))
+      ideas: state.ideas.map(idea =>
+        idea.id === id ? { ...idea, isDeleting } : idea
+      ),
     }));
   };
 
